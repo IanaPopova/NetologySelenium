@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,7 +40,7 @@ class DebitCardOrderFormTest {
     }
 
     @Test
-    public void shouldSendFormIfValidDataAndChecked() {
+    void shouldSendFormIfValidDataAndChecked() {
         WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Иванов Иван");
         form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79061369202");
@@ -53,7 +52,7 @@ class DebitCardOrderFormTest {
     }
 
     @Test
-    public void shouldNotSendFormIfNameInvalid() {
+    void shouldNotSendFormIfNameInvalid() {
         WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Ivanov Ivan");
         driver.findElement(By.cssSelector(".button__content")).click();
