@@ -52,13 +52,13 @@ class DebitCardOrderFormTest {
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", result.getText().trim());
     }
 
-//    @Test
-//    public void shouldNotSendFormIfNameInvalid() {
-//        WebElement form = driver.findElement(By.cssSelector("form"));
-//        form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Ivanov Ivan");
-//        driver.findElement(By.cssSelector(".button__content")).click();
-//        WebElement result = driver.findElement(By.cssSelector(".input__sub"));
-//        assertTrue(result.isDisplayed());
-//        assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", result.getText().trim());
-//    }
+    @Test
+    public void shouldNotSendFormIfNameInvalid() {
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Ivanov Ivan");
+        driver.findElement(By.cssSelector(".button__content")).click();
+        WebElement result = driver.findElement(By.cssSelector(".input__sub"));
+        assertTrue(result.isDisplayed());
+        assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", result.getText().trim());
+    }
 }
