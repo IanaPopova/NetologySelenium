@@ -58,6 +58,7 @@ class DebitCardOrderFormTest {
         form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Ivanov Ivan");
         driver.findElement(By.cssSelector(".button__content")).click();
         WebElement result = driver.findElement(By.cssSelector(".input__sub"));
+        assertTrue(result.isDisplayed());
         assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", result.getText().trim());
     }
 }
