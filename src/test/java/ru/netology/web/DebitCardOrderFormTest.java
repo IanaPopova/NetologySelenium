@@ -53,9 +53,10 @@ class DebitCardOrderFormTest {
     void shouldNotSendFormIfNameInvalid() {
         WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Ivanov Ivan");
+        form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79051369202");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__content")).click();
-        WebElement result = driver.findElement(By.cssSelector(".input__sub"));
+        WebElement result = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub"));
         assertTrue(result.isDisplayed());
         assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", result.getText().trim());
     }
@@ -63,12 +64,38 @@ class DebitCardOrderFormTest {
     @Test
     void shouldNotSendFormIfPhoneInvalid() {
         WebElement form = driver.findElement(By.cssSelector("form"));
+        form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Иванов Иван");
         form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("9069385");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector(".button__content")).click();
-        WebElement result = driver.findElement(By.cssSelector(".input__sub"));
+        WebElement result = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub"));
         assertTrue(result.isDisplayed());
         assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", result.getText().trim());
+
+    }
+
+    @Test
+    void shouldNotSendFormIfNameBlank() {
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("");
+        form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79051369202");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector(".button__content")).click();
+        WebElement result = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub"));
+        assertTrue(result.isDisplayed());
+        assertEquals("Поле обязательно для заполнения", result.getText().trim());
+    }
+
+    @Test
+    void shouldNotSendFormIfPhoneBlank() {
+        WebElement form = driver.findElement(By.cssSelector("form"));
+        form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Иванов Иван");
+        form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector(".button__content")).click();
+        WebElement result = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub"));
+        assertTrue(result.isDisplayed());
+        assertEquals("Поле обязательно для заполнения", result.getText().trim());
 
     }
 
@@ -79,7 +106,7 @@ class DebitCardOrderFormTest {
         form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79061369202");
         driver.findElement(By.cssSelector("[data-test-id='agreement'] input"));
         driver.findElement(By.cssSelector(".button__content")).click();
-        WebElement result = driver.findElement(By.cssSelector(".input_invalid"));
+        WebElement result = driver.findElement(By.cssSelector("[data-test-id='agreement'].input_invalid"));
         assertTrue(result.isDisplayed());
 
     }
